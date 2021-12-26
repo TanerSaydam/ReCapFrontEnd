@@ -1,0 +1,16 @@
+<table class="table">
+<thead>
+  <th>Car Name</th>
+  <th>Customer Name</th>
+  <th>Rent Date</th>
+  <th>Return Date</th>
+</thead>
+<tbody>
+  <tr *ngFor="let rental of rentals">
+    <td>{{rental.brandName}}</td>
+    <td>{{rental.customer}}</td>
+    <td>{{rental.rentDate}}</td>
+    <td>{{rental.returnDate}}</td>
+  </tr>
+</tbody>
+</table>
