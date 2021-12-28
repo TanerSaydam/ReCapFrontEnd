@@ -11,6 +11,8 @@ import { RentalService } from 'src/app/services/rental.service';
 export class RentalComponent implements OnInit {
 
   rentals:Rental[] = [];
+  currentCar:Rental;
+
 
   constructor(private rentalService:RentalService, private activetedRoute:ActivatedRoute) { }
 
@@ -46,4 +48,7 @@ export class RentalComponent implements OnInit {
     })
   }
 
+  setCurrentCar(rental:Rental){
+    this.currentCar=rental;
+  }
 }

@@ -1,4 +1,5 @@
 export interface Rental{
+  carId:number;
   brandId:number;
   brandName:string;
   colorId:number;

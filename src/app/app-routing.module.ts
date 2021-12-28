@@ -1,12 +1,14 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { CarComponent } from './components/car/car.component';
 import { RentalComponent } from './components/rental/rental.component';
 
 const routes: Routes = [
   {path:"", pathMatch:"full", component:RentalComponent},
   {path:"rentals", component:RentalComponent},
   {path:"rentals/brand/:brandId", component:RentalComponent},
-  {path:"rentals/color/:colorId", component:RentalComponent}
+  {path:"rentals/color/:colorId", component:RentalComponent},
+  {path:"car/:carId",component:CarComponent}
 ];
 
 @NgModule({

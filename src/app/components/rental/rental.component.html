@@ -8,7 +8,7 @@
 </thead>
 <tbody>
   <tr *ngFor="let rental of rentals">
-    <td>{{rental.brandName}}</td>
+    <td (click)="setCurrentCar(rental)" routerLink="/car/{{rental.carId}}">{{rental.brandName}}</td>
     <td>{{rental.colorName}}</td>
     <td>{{rental.customer}}</td>
     <td>{{rental.rentDate}}</td>
