@@ -1,15 +1,23 @@
-<div class="card-group">
-  <div class="card" *ngFor="let carImage of carImages">
-    <img src="{{carImage.imagePath}}" class="card-img-top" />
-    <div class="card-body">
-      <h5 class="card-title">{{carImage.carId}}</h5>
-      <p class="card-text">
-        <!-- brand = {{car.brandName}}
-        color = {{car.colorName}} -->
-      </p>
-      <p class="card-text">
-        <small class="text-muted">{{carImage.date}}</small>
-      </p>
-    </div>
-  </div>
+<div class="container">
+<table class="table">
+  <thead>
+    <tr>
+      <th>Car Id</th>
+      <th>Car Name</th>
+      <th>Brand Name</th>
+      <th>Color Name</th>
+      <th>Daily Price</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let car of cars">
+      <td>{{car.carId}}</td>
+      <td>{{car.carName}}</td>
+      <td>{{car.brandName}}</td>
+      <td>{{car.colorName}}</td>
+      <td>{{car.dailyPrice}}</td>
+    </tr>
+  </tbody>
+</table>
+
 </div>

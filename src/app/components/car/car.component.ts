@@ -11,7 +11,7 @@ import { CarService } from 'src/app/services/car.service';
 })
 export class CarComponent implements OnInit {
 
-  carImages: CarImage[] = [];
+  cars: Car[] = [];
   currentCar: Car;
 
   constructor(private carService:CarService, private activetedRoute:ActivatedRoute) { }
@@ -19,19 +19,41 @@ export class CarComponent implements OnInit {
   ngOnInit(): void {
     this.activetedRoute.params.subscribe(params=>{
       if(params["carId"]){
-        this.getCurrentCarImage(params["carId"])
+        this.getCurrentCar(params["carId"])
+      }
+      else if(params["brandId"]){
+        this.getCarsByBrand(params["brandId"])
+      }
+      else if(params["colorId"]){
+        this.getCarsByColor(params["colorId"])
+      }
+      else{
+        this.getCars()
       }
     })
   }
 
-  getCurrentCarImage(carId:number){
-    this.carService.getCurrentCarImages(carId).subscribe(response=>{
-      this.carImages = response.data
+  getCurrentCar(carId:number){
+    this.carService.getCurrentCar(carId).subscribe(response=>{
+      this.cars = response.data
     })
   }
 
-  getImageSource(carImage: CarImage): string {
-    let url: string = 'https://www.google.com/url?sa=i&url=https%3A%2F%2Fwww.pinterest.com%2Fpin%2F159455643032713178%2F&psig=AOvVaw1o4TooG-RO_Gkxr76qK7jL&ust=1640802128783000&source=images&cd=vfe&ved=0CAsQjRxqFwoTCLCK7LGOh_UCFQAAAAAdAAAAABAD' ;
-    return url;
+  getCarsByBrand(brandId:number){
+    this.carService.getCarsByBrand(brandId).subscribe(response=>{
+      this.cars = response.data
+    })
+  }
+
+  getCarsByColor(colorId:number){
+    this.carService.getCarsByColor(colorId).subscribe(response=>{
+      this.cars = response.data
+    })
+  }
+
+  getCars(){
+    this.carService.getCars().subscribe(response=>{
+      this.cars = response.data
+    })
   }
 }

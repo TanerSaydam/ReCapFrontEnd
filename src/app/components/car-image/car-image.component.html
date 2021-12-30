@@ -1,1 +1,8 @@
-<p>car-image works!</p>
+<div class="form-group">
+  <div class="row">
+    <div *ngFor="let carImage of carImages" class="col-md-6">
+      <img src="assets/img/{{carImage.imagePath}}" class="figure-img img-fluid rounded" width="600px" height="600px">
+    </div>
+  </div>
+  </div>
+

@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-navi',
@@ -7,9 +8,18 @@ import { Component, OnInit } from '@angular/core';
 })
 export class NaviComponent implements OnInit {
 
-  constructor() { }
+  constructor(private router:Router) { }
 
   ngOnInit(): void {
+  }
+
+  getCurrentNaviClass(url:string){
+    if(this.router.url === "/" + url){
+      return "nav-link active text-danger"
+    }
+    else{
+      return "nav-link"
+    }
   }
 
 }
