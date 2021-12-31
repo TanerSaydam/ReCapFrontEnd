@@ -1,23 +1,56 @@
 <div class="container">
-<table class="table">
-  <thead>
-    <tr>
-      <th>Car Id</th>
-      <th>Car Name</th>
-      <th>Brand Name</th>
-      <th>Color Name</th>
-      <th>Daily Price</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr *ngFor="let car of cars">
-      <td>{{car.carId}}</td>
-      <td>{{car.carName}}</td>
-      <td>{{car.brandName}}</td>
-      <td>{{car.colorName}}</td>
-      <td>{{car.dailyPrice}}</td>
-    </tr>
-  </tbody>
-</table>
+  <div class="form-group">
+    <div class="mb-3">
+      <label for="filterText" class="form-label">Car search</label>
+      <input type="text" [(ngModel)]="filterText" class="form-control" id="filterText" placeholder="enter search word">
+    </div>
+    <div *ngIf="filterText.length>2" class="alert alert-warning">
+      you've {{filterText}} searching
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-lg-9">
+      <table class="table">
+        <thead>
+          <tr>
+            <th>Car Id</th>
+            <th>Car Name</th>
+            <th>Brand Name</th>
+            <th>Color Name</th>
+            <th>Daily Price</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr routerLink="/carimages/{{car.carId}}" *ngFor="let car of cars |carFilterPipe:filterText">
+            <td>{{car.carId}}</td>
+            <td>{{car.carName}}</td>
+            <td>{{car.brandName}}</td>
+            <td>{{car.colorName}}</td>
+            <td>{{car.dailyPrice}}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="col-lg-3">
+      <div class="form-group">
+        <select  [(ngModel)]="brandId" class="form-select" aria-label="Default select example">
+          <option selected value="0">Select brand</option>
+          <option *ngFor="let brand of brands" value="{{brand.id}}">{{brand.name}}</option>
+        </select>
+      </div>
+      <br>
+
+      <div class="form-group">
+        <select  [(ngModel)]="colorId" class="form-select" aria-label="Default select example">
+          <option selected value="0">Select color</option>
+          <option *ngFor="let color of colors" value="{{color.id}}">{{color.name}}</option>
+        </select>
+      </div>
+      <br>
+      <div class="form-group">
+        <button (click)="getCarsWithBrandAndColor()" class="btn btn-primary">Filter</button>
+      </div>
+    </div>
+  </div>
 
 </div>

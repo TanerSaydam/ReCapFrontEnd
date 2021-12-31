@@ -1,7 +1,7 @@
 <br>
 <div id="page-head">
   <div id="page-title">
-    <h4 class="page-header text-overflow text-center">Recap Project Brands Page</h4>
+    <h4 class="page-header text-overflow text-center">Recap Project Colors Page</h4>
   </div>
 </div>
 
@@ -16,9 +16,17 @@
           <div class="container">
             <div class="row">
               <div class="col-lg-3">
+                <div class="mb-3">
+                  <label for="filterText" class="form-label">Color search</label>
+                  <input type="text" [(ngModel)]="filterText" class="form-control" id="filterText" placeholder="enter search word">
+                </div>
+                <div *ngIf="filterText.length>2" class="alert alert-warning">
+                  you've {{filterText}} searching
+                </div>
+
                 <ul class="list-group">
                   <li [class]="getCurrentColorClass('colors')" routerLink="/colors">All Colors</li>
-                  <li (click)="setCurrentColor(color)" routerLink="/color/{{color.id}}" *ngFor="let color of colors" [class]='getCurrentColorClass("color/" + color.id)'>{{color.name}}</li>
+                  <li (click)="setCurrentColor(color)" routerLink="/color/{{color.id}}" *ngFor="let color of colors |colorFilterPipe:filterText" [class]='getCurrentColorClass("color/" + color.id)'>{{color.name}}</li>
                 </ul>
 
                 <h5 *ngIf="currentColor">{{currentColor.name}}</h5>

@@ -1,8 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { Brand } from 'src/app/models/brand';
 import { Car } from 'src/app/models/car';
 import { CarImage } from 'src/app/models/carImage';
+import { Color } from 'src/app/models/color';
+import { BrandService } from 'src/app/services/brand.service';
 import { CarService } from 'src/app/services/car.service';
+import { ColorService } from 'src/app/services/color.service';
 
 @Component({
   selector: 'app-car',
@@ -13,8 +17,19 @@ export class CarComponent implements OnInit {
 
   cars: Car[] = [];
   currentCar: Car;
+  filterText = "";
 
-  constructor(private carService:CarService, private activetedRoute:ActivatedRoute) { }
+  brandId:number = 0;
+  colorId:number = 0;
+
+  brands: Brand[] = [];
+  colors: Color[] = [];
+
+  constructor(
+    private carService:CarService,
+    private colorSerivce:ColorService,
+    private brandService:BrandService,
+    private activetedRoute:ActivatedRoute) { }
 
   ngOnInit(): void {
     this.activetedRoute.params.subscribe(params=>{
@@ -30,6 +45,8 @@ export class CarComponent implements OnInit {
       else{
         this.getCars()
       }
+      this.getBrands()
+      this.getColors()
     })
   }
 
@@ -51,9 +68,39 @@ export class CarComponent implements OnInit {
     })
   }
 
+  getCarsWithBrandAndColor(){
+    if(this.brandId == 0 && this.colorId ==0){
+      this.getCars()
+    }
+    else if(this.brandId == 0){
+      this.getCarsByColor(this.colorId)
+    }
+    else if(this.colorId == 0){
+      this.getCarsByBrand(this.brandId)
+    }
+    else{
+      this.carService.getCarsWithBrandAndColor(this.brandId,this.colorId).subscribe(response=>{
+        this.cars = response.data
+      })
+    }
+  }
+
   getCars(){
     this.carService.getCars().subscribe(response=>{
       this.cars = response.data
     })
   }
+
+  getBrands(){
+    this.brandService.getBrands().subscribe(response=>{
+      this.brands = response.data
+    });
+  }
+
+  getColors(){
+    this.colorSerivce.getColors().subscribe(response=>{
+      this.colors = response.data
+    })
+  }
 }
+

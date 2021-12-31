@@ -16,10 +16,20 @@
           <div class="container">
             <div class="row">
               <div class="col-lg-3">
+                <div class="mb-3">
+                  <label for="filterText" class="form-label">Brand search</label>
+                  <input type="text" [(ngModel)]="filterText" class="form-control" id="filterText" placeholder="enter search word">
+                </div>
+                <div *ngIf="filterText.length>2" class="alert alert-warning">
+                  you've {{filterText}} searching
+                </div>
+
                 <ul class="list-group">
                   <li [class]="setCurrentBandClass('brands')" routerLink="/brands">All Brands</li>
                   <li (click)="setCurrentBrands(brand)" routerLink="/brand/{{brand.id}}"
-                    *ngFor="let brand of brands" [class]='setCurrentBandClass("brand/" + brand.id)'>{{brand.name}}</li>
+                    *ngFor="let brand of brands |brandFilterPipe:filterText" [class]='setCurrentBandClass("brand/" + brand.id)'>
+                    {{brand.name}}
+                  </li>
                 </ul>
 
                 <h5 *ngIf="currentBrand">{{currentBrand.name}}</h5>
