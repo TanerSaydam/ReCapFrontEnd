@@ -18,15 +18,17 @@
               <div class="row">
                 <div class="col-md-4">
                   <label for="rentDate">Rent Date</label>
-                <input type="date" id="rentDate" class="form-control">
+                  <input type="date" id="rentDate" [(ngModel)]="rentDate" class="form-control">
                 </div>
                 <div class="col-md-4">
                   <label for="returnDate">Return Date</label>
-                <input type="date" id="returnDate" class="form-control">
+                  <input type="date" id="returnDate" [(ngModel)]="returnDate" class="form-control">
                 </div>
                 <div class="col-auto">
                   <br>
-                  <button class="btn btn-success" id="rentACar">Rent</button>
+                  <button type="button" class="btn btn-primary" (click)="setRental()" data-bs-toggle="modal" data-bs-target="#paymentModel">
+                    Rent
+                  </button>
                 </div>
               </div>
             </div>
@@ -37,7 +39,7 @@
                   <img src="assets/img/{{carImage.imagePath}}" class="figure-img img-fluid rounded">
                 </div>
               </div>
-              </div>
+            </div>
           </div>
         </div>
       </div>
@@ -47,3 +49,55 @@
 
 
 
+<div class="modal fade" id="paymentModel" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Payment</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <div class="form-group">
+          <div class="row">
+            <label class="col-md-2 control-label">Full Name</label>
+            <div class="col-md-10">
+              <input type="text" [(ngModel)]="creditCart.fullName" class="form-control">
+            </div>
+          </div>
+        </div>
+        <div class="form-group">
+          <div class="row">
+            <label class="col-md-2 control-label">Cart Number</label>
+            <div class="col-md-10">
+              <input type="text" [(ngModel)]="creditCart.cartNumber" class="form-control">
+            </div>
+          </div>
+        </div>
+        <div class="form-group">
+          <div class="row">
+            <label class="col-md-2 control-label">Mounth</label>
+            <div class="col-md-4">
+              <input type="text" [(ngModel)]="creditCart.expirationMounth" class="form-control">
+            </div>
+            <label class="col-md-2 control-label">Year</label>
+            <div class="col-md-4">
+              <input type="text" [(ngModel)]="creditCart.expirationYear" class="form-control">
+            </div>
+          </div>
+        </div>
+        <div class="form-group">
+          <div class="row">
+            <label class="col-md-2 control-label">CVV</label>
+            <div class="col-md-10">
+              <input type="text" [(ngModel)]="creditCart.cvv" class="form-control">
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        <button type="button" (click)="postRentAndPay(creditCart,rental)" data-bs-dismiss="modal" class="btn btn-primary">Pay and Rent A Car</button>
+      </div>
+    </div>
+  </div>
+</div>

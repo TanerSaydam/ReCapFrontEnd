@@ -17,6 +17,9 @@ import { VatAddedPipe } from './pipes/vat-added.pipe';
 import { FormsModule } from '@angular/forms';
 import { ColorPipePipe } from './pipes/color-pipe.pipe';
 import { CarPipePipe } from './pipes/car-pipe.pipe';
+import { ToastrModule } from 'ngx-toastr';
+import { BrowserAnimationsModule} from '@angular/platform-browser/animations';
+import { RentalPipePipe } from './pipes/rental-pipe.pipe';
 
 @NgModule({
   declarations: [
@@ -32,12 +35,17 @@ import { CarPipePipe } from './pipes/car-pipe.pipe';
     BrandPipe,
     VatAddedPipe,
     ColorPipePipe,
-    CarPipePipe
+    CarPipePipe,
+    RentalPipePipe
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
+    ToastrModule.forRoot({
+      positionClass:"toast-bottom-right"
+    }),
+    BrowserAnimationsModule,
     FormsModule
   ],
   providers: [],
