@@ -1,0 +1,41 @@
+<br>
+<div class="container">
+  <div class="card">
+    <div class="card-header">
+      <h5>Car add</h5>
+    </div>
+    <div class="card-body">
+      <form [formGroup]="carAddForm">
+        <div class="form-group">
+          <label for="name">Brand Name</label>
+          <div class="form-group">
+            <select id="brandId" formControlName="brandId" class="form-select" aria-label="Default select brand">
+              <option *ngFor="let brand of brands" value="{{brand.id}}">{{brand.name}}</option>
+            </select>
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="name">Color Name</label>
+          <select id="colorId" formControlName="colorId" class="form-select" aria-label="Default select color">
+            <option *ngFor="let color of colors" value="{{color.id}}">{{color.name}}</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label for="name">Model year</label>
+          <input id="modelYear" formControlName="modelYear" class="form-control" type="number" value="2000">
+        </div>
+        <div class="form-group">
+          <label for="name">Daily price</label>
+          <input id="dailyPrice" formControlName="dailyPrice" class="form-control" type="number" value="0">
+        </div>
+        <div class="form-group">
+          <label for="name">Description</label>
+          <textarea id="description" formControlName="description" class="form-control" rows="5"></textarea>
+        </div>
+      </form>
+    </div>
+    <div class="card-footer">
+      <button class="btn btn-fill btn-primary" (click)="add()">Add Car</button>
+    </div>
+  </div>
+</div>

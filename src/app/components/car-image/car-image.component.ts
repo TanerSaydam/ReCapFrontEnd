@@ -6,7 +6,7 @@ import { Car } from 'src/app/models/car';
 import { CarImage } from 'src/app/models/carImage';
 import { CreditCart } from 'src/app/models/creditCart';
 import { Rental } from 'src/app/models/rental';
-import { CarService } from 'src/app/services/car-image.service';
+import { CarImageService } from 'src/app/services/car-image.service';
 import { CreditCartService } from 'src/app/services/credit-cart.service';
 import { RentalService } from 'src/app/services/rental.service';
 
@@ -28,7 +28,7 @@ export class CarImageComponent implements OnInit {
 
 
   constructor(
-    private carService:CarService,
+    private carImageService:CarImageService,
     private activetedRoute:ActivatedRoute,
     private creditCartService:CreditCartService,
     private rentalService:RentalService,
@@ -43,7 +43,7 @@ export class CarImageComponent implements OnInit {
   }
 
   getCurrentCarImage(carId:number){
-    this.carService.getCurrentCarImages(carId).subscribe(response=>{
+    this.carImageService.getCurrentCarImages(carId).subscribe(response=>{
       this.carImages = response.data
     })
   }

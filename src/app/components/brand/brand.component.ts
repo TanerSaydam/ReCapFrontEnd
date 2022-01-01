@@ -32,10 +32,10 @@ export class BrandComponent implements OnInit {
 
   setCurrentBandClass(url:string){
     if(this.router.url === "/" + url){
-      return "list-group-item active"
+      return "text-danger"
     }
     else{
-      return "list-group-item"
+      return "text-dark"
     }
   }
 }

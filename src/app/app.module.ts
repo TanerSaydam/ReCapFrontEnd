@@ -14,12 +14,18 @@ import { CarImageComponent } from './components/car-image/car-image.component';
 import { IndexComponent } from './components/index/index.component';
 import { BrandPipe } from './pipes/filter.pipe';
 import { VatAddedPipe } from './pipes/vat-added.pipe';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ColorPipePipe } from './pipes/color-pipe.pipe';
 import { CarPipePipe } from './pipes/car-pipe.pipe';
 import { ToastrModule } from 'ngx-toastr';
 import { BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import { RentalPipePipe } from './pipes/rental-pipe.pipe';
+import { BrandAddComponent } from './components/brand-add/brand-add.component';
+import { CarAddComponent } from './components/car-add/car-add.component';
+import { ColorAddComponent } from './components/color-add/color-add.component';
+import { BrandUpdateComponent } from './components/brand-update/brand-update.component';
+import { CarUpdateComponent } from './components/car-update/car-update.component';
+import { ColorUpdateComponent } from './components/color-update/color-update.component';
 
 @NgModule({
   declarations: [
@@ -36,12 +42,19 @@ import { RentalPipePipe } from './pipes/rental-pipe.pipe';
     VatAddedPipe,
     ColorPipePipe,
     CarPipePipe,
-    RentalPipePipe
+    RentalPipePipe,
+    BrandAddComponent,
+    CarAddComponent,
+    ColorAddComponent,
+    BrandUpdateComponent,
+    CarUpdateComponent,
+    ColorUpdateComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
+    ReactiveFormsModule,
     ToastrModule.forRoot({
       positionClass:"toast-bottom-right"
     }),

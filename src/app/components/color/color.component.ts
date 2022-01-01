@@ -33,10 +33,10 @@ export class ColorComponent implements OnInit {
 
   getCurrentColorClass(url:string){
     if(this.router.url === "/" + url){
-      return "list-group-item active"
+      return "text-danger"
     }
     else{
-      return "list-group-item"
+      return "text-dark"
     }
   }
 }

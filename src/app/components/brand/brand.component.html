@@ -11,9 +11,15 @@
   <div class="row">
     <div class="col-lg-12 col-lg-offset-2">
 
-      <div class="panel panel-body text-center">
+      <div class="panel panel-body">
         <div class="panel-body">
           <div class="container">
+            <div class="form-group mb-3">
+              <button routerLink="/brands/add" class="btn btn-primary">
+                Brand Add
+              </button>
+            </div>
+
             <div class="row">
               <div class="col-lg-3">
                 <div class="mb-3">
@@ -24,14 +30,20 @@
                   you've {{filterText}} searching
                 </div>
 
-                <ul class="list-group">
-                  <li [class]="setCurrentBandClass('brands')" routerLink="/brands">All Brands</li>
-                  <li (click)="setCurrentBrands(brand)" routerLink="/brand/{{brand.id}}"
-                    *ngFor="let brand of brands |brandFilterPipe:filterText" [class]='setCurrentBandClass("brand/" + brand.id)'>
-                    {{brand.name}}
-                  </li>
-                </ul>
-
+                <table class="table">
+                  <thead>
+                    <tr>
+                      <th>Brand Name</th>
+                      <th>Process</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr (click)="setCurrentBrands(brand)" *ngFor="let brand of brands |brandFilterPipe:filterText" [class]='setCurrentBandClass("brand/" + brand.id)'>
+                        <td routerLink="/brand/{{brand.id}}">{{brand.name}}</td>
+                        <td><button routerLink="/brands/{{brand.id}}" class="btn btn-warning">Edit</button></td>
+                    </tr>
+                  </tbody>
+                </table>
                 <h5 *ngIf="currentBrand">{{currentBrand.name}}</h5>
               </div>
               <div class="col-lg-9">

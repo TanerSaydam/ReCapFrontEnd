@@ -1,5 +1,10 @@
 <div class="container">
   <div class="form-group">
+    <div class="form-group mb-3">
+      <button routerLink="/cars/add" class="btn btn-primary">
+        Car Add
+      </button>
+    </div>
     <div class="mb-3">
       <label for="filterText" class="form-label">Car search</label>
       <input type="text" [(ngModel)]="filterText" class="form-control" id="filterText" placeholder="enter search word">
@@ -18,15 +23,17 @@
             <th>Brand Name</th>
             <th>Color Name</th>
             <th>Daily Price</th>
+            <th>Process</th>
           </tr>
         </thead>
         <tbody>
-          <tr routerLink="/carimages/{{car.carId}}" *ngFor="let car of cars |carFilterPipe:filterText">
+          <tr *ngFor="let car of cars |carFilterPipe:filterText">
             <td>{{car.carId}}</td>
-            <td>{{car.carName}}</td>
+            <td routerLink="/carimages/{{car.carId}}">{{car.carName}}</td>
             <td>{{car.brandName}}</td>
             <td>{{car.colorName}}</td>
             <td>{{car.dailyPrice}}</td>
+            <td><button class="btn btn-warning" routerLink="/cars/{{car.carId}}">Edit</button></td>
           </tr>
         </tbody>
       </table>

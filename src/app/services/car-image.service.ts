@@ -8,7 +8,8 @@ import { ListResponseModel } from '../models/listResponseModel';
 @Injectable({
   providedIn: 'root'
 })
-export class CarService {
+export class CarImageService {
+  [x: string]: any;
 
   apiUrl = "https://localhost:44356/api/";
 

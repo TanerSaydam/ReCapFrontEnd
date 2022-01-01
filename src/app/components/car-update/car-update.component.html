@@ -1,0 +1,35 @@
+<br>
+<div class="container">
+  <div class="card">
+    <div class="card-header">
+      <h5>Car update</h5>
+    </div>
+    <div class="card-body">
+      <form [formGroup]="carUpdateForm">
+        <div class="form-group">
+          <label for="name">Brand Name</label>
+          <input id="brandId" formControlName="brandId" class="form-control" type="number">
+        </div>
+        <div class="form-group">
+          <label for="name">Color Name</label>
+          <input id="colorId" formControlName="colorId" class="form-control" type="number">
+        </div>
+        <div class="form-group">
+          <label for="name">Model year</label>
+          <input id="modelYear" formControlName="modelYear" class="form-control" type="number">
+        </div>
+        <div class="form-group">
+          <label for="name">Daily price</label>
+          <input id="dailyPrice" formControlName="dailyPrice" class="form-control" type="number">
+        </div>
+        <div class="form-group">
+          <label for="name">Description</label>
+          <textarea id="description" formControlName="description" class="form-control" rows="5"></textarea>
+        </div>
+      </form>
+    </div>
+    <div class="card-footer">
+      <button class="btn btn-fill btn-primary" (click)="update()">Update Car</button>
+    </div>
+  </div>
+</div>

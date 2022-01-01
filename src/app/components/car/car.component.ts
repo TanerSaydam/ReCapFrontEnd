@@ -27,7 +27,7 @@ export class CarComponent implements OnInit {
 
   constructor(
     private carService:CarService,
-    private colorSerivce:ColorService,
+    private colorService:ColorService,
     private brandService:BrandService,
     private activetedRoute:ActivatedRoute) { }
 
@@ -98,7 +98,7 @@ export class CarComponent implements OnInit {
   }
 
   getColors(){
-    this.colorSerivce.getColors().subscribe(response=>{
+    this.colorService.getColors().subscribe(response=>{
       this.colors = response.data
     })
   }
