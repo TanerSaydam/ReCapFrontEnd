@@ -4,6 +4,7 @@ import { Brand } from 'src/app/models/brand';
 import { Car } from 'src/app/models/car';
 import { CarImage } from 'src/app/models/carImage';
 import { Color } from 'src/app/models/color';
+import { AuthService } from 'src/app/services/auth.service';
 import { BrandService } from 'src/app/services/brand.service';
 import { CarService } from 'src/app/services/car.service';
 import { ColorService } from 'src/app/services/color.service';
@@ -25,14 +26,18 @@ export class CarComponent implements OnInit {
   brands: Brand[] = [];
   colors: Color[] = [];
 
+  isAuthenticated:boolean;
+
   constructor(
     private carService:CarService,
     private colorService:ColorService,
     private brandService:BrandService,
-    private activetedRoute:ActivatedRoute) { }
+    private activetedRoute:ActivatedRoute,
+    private authService:AuthService) { }
 
   ngOnInit(): void {
     this.activetedRoute.params.subscribe(params=>{
+      this.isAuthenticated = this.authService.isAuthenticated();
       if(params["carId"]){
         this.getCurrentCar(params["carId"])
       }
@@ -49,6 +54,8 @@ export class CarComponent implements OnInit {
       this.getColors()
     })
   }
+
+
 
   getCurrentCar(carId:number){
     this.carService.getCurrentCar(carId).subscribe(response=>{

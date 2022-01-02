@@ -25,8 +25,20 @@
           </li>
         </ul>
         <form class="d-flex">
-          <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-          <button class="btn btn-outline-success" type="submit">Search</button>
+          <button *ngIf="!isAuthenticated" class="btn btn-danger me-2" routerLink="/register">Register</button>
+          <button *ngIf="!isAuthenticated" class="btn btn-success me-2" routerLink="/login">Login</button>
+          <div *ngIf="isAuthenticated" class="dropdown ms-3">
+            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+              {{name}}
+            </a>
+            <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+              <li><a class="dropdown-item" routerLink="/user">Profil</a></li>
+              <li><a class="dropdown-item" href="#" (click)="logout()">Logout</a></li>
+            </ul>
+          </div>
+
+          <!-- <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+          <button class="btn btn-outline-success" type="submit">Search</button> -->
         </form>
       </div>
     </div>

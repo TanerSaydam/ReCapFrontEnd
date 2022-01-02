@@ -14,7 +14,7 @@
       <div class="panel panel-body">
         <div class="panel-body">
           <div class="container">
-            <div class="form-group mb-3">
+            <div *ngIf="isAuthenticated" class="form-group mb-3">
               <button routerLink="/colors/add" class="btn btn-primary">
                 Color Add
               </button>
@@ -32,13 +32,13 @@
                   <thead>
                     <tr>
                       <th>Color Name</th>
-                      <th>Process</th>
+                      <th *ngIf="isAuthenticated">Process</th>
                     </tr>
                   </thead>
                   <tbody>
                     <tr (click)="setCurrentColor(color)" *ngFor="let color of colors |colorFilterPipe:filterText" [class]='getCurrentColorClass("color/" + color.id)'>
                         <td routerLink="/color/{{color.id}}">{{color.name}}</td>
-                        <td><button routerLink="/colors/{{color.id}}" class="btn btn-warning">Edit</button></td>
+                        <td *ngIf="isAuthenticated"><button routerLink="/colors/color/{{color.id}}" class="btn btn-warning">Edit</button></td>
                     </tr>
                   </tbody>
                 </table>

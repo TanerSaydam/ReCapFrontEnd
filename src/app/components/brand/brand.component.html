@@ -14,7 +14,7 @@
       <div class="panel panel-body">
         <div class="panel-body">
           <div class="container">
-            <div class="form-group mb-3">
+            <div *ngIf="isAuthenticated" class="form-group mb-3">
               <button routerLink="/brands/add" class="btn btn-primary">
                 Brand Add
               </button>
@@ -34,13 +34,13 @@
                   <thead>
                     <tr>
                       <th>Brand Name</th>
-                      <th>Process</th>
+                      <th *ngIf="isAuthenticated">Process</th>
                     </tr>
                   </thead>
                   <tbody>
                     <tr (click)="setCurrentBrands(brand)" *ngFor="let brand of brands |brandFilterPipe:filterText" [class]='setCurrentBandClass("brand/" + brand.id)'>
                         <td routerLink="/brand/{{brand.id}}">{{brand.name}}</td>
-                        <td><button routerLink="/brands/{{brand.id}}" class="btn btn-warning">Edit</button></td>
+                        <td *ngIf="isAuthenticated"><button routerLink="/brands/brand/{{brand.id}}" class="btn btn-warning">Edit</button></td>
                     </tr>
                   </tbody>
                 </table>

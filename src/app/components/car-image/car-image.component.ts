@@ -6,6 +6,7 @@ import { Car } from 'src/app/models/car';
 import { CarImage } from 'src/app/models/carImage';
 import { CreditCart } from 'src/app/models/creditCart';
 import { Rental } from 'src/app/models/rental';
+import { AuthService } from 'src/app/services/auth.service';
 import { CarImageService } from 'src/app/services/car-image.service';
 import { CreditCartService } from 'src/app/services/credit-cart.service';
 import { RentalService } from 'src/app/services/rental.service';
@@ -23,8 +24,10 @@ export class CarImageComponent implements OnInit {
   rentDate: Date = new Date();
   returnDate: Date;
   carId:number = 0;
+  rememberCard:boolean;
   creditCart: CreditCart = {id:0,customerId:1,fullName:"",cartNumber:"",expirationMounth:0,expirationYear:0,cvv:0};
   rental: Rental;
+  isAuthenticated:boolean;
 
 
   constructor(
@@ -32,12 +35,15 @@ export class CarImageComponent implements OnInit {
     private activetedRoute:ActivatedRoute,
     private creditCartService:CreditCartService,
     private rentalService:RentalService,
-    private toastrService:ToastrService) { }
+    private toastrService:ToastrService,
+    private authService:AuthService) { }
 
   ngOnInit(): void {
+    this.isAuthenticated = this.authService.isAuthenticated();
     this.activetedRoute.params.subscribe(params=>{
       if(params["carId"]){
-        this.getCurrentCarImage(params["carId"])
+        this.getCurrentCarImage(params["carId"]);
+        this.getCreditCart();
       }
     })
   }
@@ -46,6 +52,23 @@ export class CarImageComponent implements OnInit {
     this.carImageService.getCurrentCarImages(carId).subscribe(response=>{
       this.carImages = response.data
     })
+  }
+
+  getCreditCart(){
+    this.creditCartService.getCreditCart(1).subscribe(response=>{
+      this.creditCart = {
+        cartNumber: response.data.cartNumber,
+        customerId: 1,
+        cvv: response.data.cvv,
+        expirationMounth: response.data.expirationMounth,
+        expirationYear: response.data.expirationYear,
+        fullName: response.data.fullName,
+        id: response.data.id
+      }
+    },
+    er=>{
+      return false;
+    });
   }
 
   setRental(){
@@ -64,21 +87,38 @@ export class CarImageComponent implements OnInit {
   }
 
   postRentAndPay(creditCart:CreditCart,rental:Rental){
+    console.log(this.rememberCard)
     this.rentalService.postRental(rental).subscribe(
       response =>{
       console.log(response.success)
       if(response.success){
         this.toastrService.success(response.message)
-        this.creditCartService.sendCreditCart(creditCart).subscribe(r=> {
-          if(r.success){
-            this.toastrService.success("Payment successiful.")
-           }
-           else{
-            this.toastrService.error(r.message)
-           }
-        }, e=>{
-          this.toastrService.error(e.error.message, 'Error!');
-        })
+        if (this.rememberCard) {
+          this.creditCartService.sendCreditCartandSave(creditCart).subscribe(r=> {
+            console.log(r)
+            if(r.success){
+              this.toastrService.success(r.message)
+             }
+             else{
+              this.toastrService.error(r.message)
+             }
+          }, e=>{
+            this.toastrService.error(e.error.message, 'Error!');
+          })
+        }
+        else{
+          this.creditCartService.sendCreditCartnotSave().subscribe(r=> {
+            console.log(r)
+            if(r.success){
+              this.toastrService.success(r.message)
+             }
+             else{
+              this.toastrService.error(r.message)
+             }
+          }, e=>{
+            this.toastrService.error(e.error.message, 'Error!');
+          })
+        }
       }
       else{
         this.toastrService.error(response.message)

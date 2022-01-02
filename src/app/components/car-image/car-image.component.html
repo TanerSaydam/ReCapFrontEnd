@@ -14,7 +14,7 @@
       <div class="panel panel-body text-center">
         <div class="panel-body">
           <div class="container">
-            <div class="form-group">
+            <div *ngIf="isAuthenticated" class="form-group">
               <div class="row">
                 <div class="col-md-4">
                   <label for="rentDate">Rent Date</label>
@@ -26,7 +26,8 @@
                 </div>
                 <div class="col-auto">
                   <br>
-                  <button type="button" class="btn btn-primary" (click)="setRental()" data-bs-toggle="modal" data-bs-target="#paymentModel">
+                  <button type="button" class="btn btn-primary" (click)="setRental()" data-bs-toggle="modal"
+                    data-bs-target="#paymentModel">
                     Rent
                   </button>
                 </div>
@@ -50,14 +51,14 @@
 
 
 <div class="modal fade" id="paymentModel" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog">
+  <div class="modal-dialog modal-lg">
     <div class="modal-content">
       <div class="modal-header">
         <h5 class="modal-title">Payment</h5>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
-        <div class="form-group">
+        <div class="form-group mb-3">
           <div class="row">
             <label class="col-md-2 control-label">Full Name</label>
             <div class="col-md-10">
@@ -65,7 +66,7 @@
             </div>
           </div>
         </div>
-        <div class="form-group">
+        <div class="form-group mb-3">
           <div class="row">
             <label class="col-md-2 control-label">Cart Number</label>
             <div class="col-md-10">
@@ -73,7 +74,7 @@
             </div>
           </div>
         </div>
-        <div class="form-group">
+        <div class="form-group mb-3">
           <div class="row">
             <label class="col-md-2 control-label">Mounth</label>
             <div class="col-md-4">
@@ -85,7 +86,7 @@
             </div>
           </div>
         </div>
-        <div class="form-group">
+        <div class="form-group mb-3">
           <div class="row">
             <label class="col-md-2 control-label">CVV</label>
             <div class="col-md-10">
@@ -95,8 +96,11 @@
         </div>
       </div>
       <div class="modal-footer">
+        <label for="rememberMe">Remember Card</label>
+        <input type="checkbox" id="rememberMe" [(ngModel)]="rememberCard" class="control-checkbox">
         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-        <button type="button" (click)="postRentAndPay(creditCart,rental)" data-bs-dismiss="modal" class="btn btn-primary">Pay and Rent A Car</button>
+        <button type="button" (click)="postRentAndPay(creditCart,rental)" data-bs-dismiss="modal"
+          class="btn btn-primary">Pay and Rent A Car</button>
       </div>
     </div>
   </div>

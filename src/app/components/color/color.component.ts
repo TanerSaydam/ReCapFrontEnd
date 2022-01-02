@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Color } from 'src/app/models/color';
+import { AuthService } from 'src/app/services/auth.service';
 import { ColorService } from 'src/app/services/color.service';
 
 @Component({
@@ -13,11 +14,15 @@ export class ColorComponent implements OnInit {
   colors:Color[] = [];
   currentColor:Color;
   filterText = "";
+  isAuthenticated:boolean;
 
-  constructor(private colorService:ColorService, private router:Router) { }
+  constructor(
+    private colorService:ColorService,
+    private router:Router,
+    private authService:AuthService) { }
 
   ngOnInit(): void {
-
+    this.isAuthenticated = this.authService.isAuthenticated()
     this.getColors();
   }
 

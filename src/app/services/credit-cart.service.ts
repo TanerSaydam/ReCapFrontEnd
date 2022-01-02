@@ -4,6 +4,7 @@ import { Observable } from 'rxjs';
 import { CreditCart } from '../models/creditCart';
 import { ListResponseModel } from '../models/listResponseModel';
 import { ResponseModel } from '../models/responseModel';
+import { SingleReponseModel } from '../models/single-response-model.service';
 
 @Injectable({
   providedIn: 'root'
@@ -14,8 +15,18 @@ export class CreditCartService {
 
   constructor(private httpClient:HttpClient) { }
 
-  sendCreditCart(creditCart:CreditCart):Observable<ListResponseModel<CreditCart>>{
+  sendCreditCartandSave(creditCart:CreditCart):Observable<ListResponseModel<CreditCart>>{
     let newPath = this.apiUrl + "creditcarts/add";
-    return this.httpClient.post<ListResponseModel<CreditCart>>(newPath,creditCart);
+      return this.httpClient.post<ListResponseModel<CreditCart>>(newPath,creditCart);
+  }
+
+  sendCreditCartnotSave():Observable<ResponseModel>{
+    let newPath = this.apiUrl + "creditcarts/payment";
+    return this.httpClient.get<ResponseModel>(newPath);
+  }
+
+  getCreditCart(customerId:number):Observable<SingleReponseModel<CreditCart>>{
+    let newPath = this.apiUrl + "creditcarts/getbycustomerid?customerId=" + customerId;
+    return this.httpClient.get<SingleReponseModel<CreditCart>>(newPath);
   }
 }

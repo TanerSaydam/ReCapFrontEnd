@@ -1,6 +1,6 @@
 <div class="container">
   <div class="form-group">
-    <div class="form-group mb-3">
+    <div *ngIf="isAuthenticated" class="form-group mb-3">
       <button routerLink="/cars/add" class="btn btn-primary">
         Car Add
       </button>
@@ -23,22 +23,24 @@
             <th>Brand Name</th>
             <th>Color Name</th>
             <th>Daily Price</th>
-            <th>Process</th>
+            <th>Findeks Score</th>
+            <th *ngIf="isAuthenticated">Process</th>
           </tr>
         </thead>
         <tbody>
           <tr *ngFor="let car of cars |carFilterPipe:filterText">
             <td>{{car.carId}}</td>
-            <td routerLink="/carimages/{{car.carId}}">{{car.carName}}</td>
+            <td routerLink="/carimages/carimages/{{car.carId}}">{{car.carName}}</td>
             <td>{{car.brandName}}</td>
             <td>{{car.colorName}}</td>
             <td>{{car.dailyPrice}}</td>
-            <td><button class="btn btn-warning" routerLink="/cars/{{car.carId}}">Edit</button></td>
+            <td>{{car.findeksScore}}</td>
+            <td *ngIf="isAuthenticated"><button class="btn btn-warning" routerLink="/cars/car/{{car.carId}}">Edit</button></td>
           </tr>
         </tbody>
       </table>
     </div>
-    <div class="col-lg-3">
+    <div *ngIf(isAuth()) class="col-lg-3">
       <div class="form-group">
         <select  [(ngModel)]="brandId" class="form-select" aria-label="Default select example">
           <option selected value="0">Select brand</option>
