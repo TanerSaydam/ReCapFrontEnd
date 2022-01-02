@@ -9,7 +9,8 @@ import { Rental } from '../models/rental';
 })
 export class RentalService {
 
-  apiUrl = "https://localhost:44356/api/";
+  //apiUrl = "https://localhost:44356/api/";
+  apiUrl = "https://webapi.ecnorow.com/api/";
 
   constructor(private httpClient:HttpClient) { }
 

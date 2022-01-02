@@ -14,7 +14,8 @@ export class AuthService {
 
   constructor(private httpClient:HttpClient) { }
 
-  apiUrl = "https://localhost:44356/api/";
+  //apiUrl = "https://localhost:44356/api/";
+  apiUrl = "https://webapi.ecnorow.com/api/";
 
   login(loginModel:LoginModel):Observable<SingleReponseModel<TokenModel>>{
     let newPath = this.apiUrl + "auth/login";

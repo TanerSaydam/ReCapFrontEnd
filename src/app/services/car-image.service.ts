@@ -11,7 +11,8 @@ import { ListResponseModel } from '../models/listResponseModel';
 export class CarImageService {
   [x: string]: any;
 
-  apiUrl = "https://localhost:44356/api/";
+  //apiUrl = "https://localhost:44356/api/";
+  apiUrl = "https://webapi.ecnorow.com/api/";
 
   constructor(private httpClient:HttpClient) { }
 

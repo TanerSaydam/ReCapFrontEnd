@@ -14,7 +14,8 @@ import { SingleReponseModel } from '../models/single-response-model.service';
 })
 export class CarService {
 
-  apiUrl = "https://localhost:44356/api/";
+  //apiUrl = "https://localhost:44356/api/";
+  apiUrl = "https://webapi.ecnorow.com/api/";
 
   constructor(private httpClient:HttpClient) { }
 
