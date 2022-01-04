@@ -39,8 +39,8 @@ export class LoginComponent implements OnInit {
         this.router.navigate([""])
         this.toastrService.success(response.message)
         localStorage.setItem("token",response.data.accessToken.token)
-        localStorage.setItem("name",response.data.user.firstName + " " + response.data.user.lastName)
-        localStorage.setItem("userId",response.data.user.id.toString());
+        //localStorage.setItem("name",response.data.user.firstName + " " + response.data.user.lastName)
+        //localStorage.setItem("userId",response.data.user.id.toString());
       },
       responseError=>{
         this.toastrService.error(responseError.error)

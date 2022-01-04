@@ -23,6 +23,10 @@ export class LocalStorageService {
     return result;
   }
 
+  getToken():string{
+    return localStorage.getItem("token");
+  }
+
   getString(key:string): string | null{
     if (!this.isLocalStorageSupported) return null;
 
